@@ -5,6 +5,11 @@
  #include "Entity.h"
  #include "Arduino.h"
 
+ int x;
+ int y;
+ int screenHeight;
+ int screenWidth;
+
 /**
  * Constructor
  * int x_ - the x position of the entity
@@ -12,7 +17,7 @@
  * int screenWidth_ - the number of pixels in the screen's width
  * int screenHeight_ - the number of pixels in the screen's height
  */
-Entity::Entity(int x_ = 0, int y_ = 0, int screenWidth_ = 8, int screenHeight_ = 8) {
+Entity::Entity(int x_, int y_, int screenWidth_ = 8, int screenHeight_ = 8) {
   x = x_;
   y = y_;
   screenWidth = screenWidth_;
@@ -60,20 +65,4 @@ int Entity::getX() {
  */
 int Entity::getY() {
   return y;
-}
-
-/**
- * getWidth - returns the width value of the entity
- * return int width
- */
-int Entity::getWidth() {
-  return width;
-}
-
-/**
- * getHeight - returns the height value of the entity
- * return int height
- */
-int Entity::getHeight() {
-  return height;
 }
