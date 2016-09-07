@@ -6,7 +6,7 @@
  #include "Arduino.h"
  #include "lib/elapsedMillis/elapsedMillis.h"
 
- elapsedMillis timeElapsed;
+ elapsedMillis timeElapsedScreen;
 
 
 //set instance variables
@@ -52,7 +52,7 @@ bool Screen::animationOn() {
  */
 void Screen::loop() {
   if (animOn){
-    //drawMatrix(smileMatrix, 10000);
+    //drawMatrix(smileMatrix, 400);
     drawMatrix(blankMatrix, 400);
     drawMatrix(anim1Matrix, 400);
     drawMatrix(anim2Matrix, 400);
@@ -73,25 +73,28 @@ void Screen::loop() {
  * int displayTime - how long to display the matrix for
  */
 void Screen::drawMatrix(int matrix[8][8], int displayTime) {
-  timeElapsed = 0;
-  while(timeElapsed < displayTime){
+  timeElapsedScreen = 0;
+  while(timeElapsedScreen < displayTime){
     int writeData[] = {/*columns*/0,0,0,0,0,0,0,0,/*rows*/0,0,0,0,0,0,0,0};
     for (int i = 0; i < 8; i++){
       for (int j = 0; j < 16; j++){
         writeData[j] = 0;
       }
       for (int j = 0; j < 8; j++){
-        if (matrix[i][j] == 1) {
+        if (matrix[j][i] == 1) {
           writeData[i+8] = 1;
           writeData[j] = 0;
         } else {
           writeData[j] = 1;
         }
       }
+      /*for (int j = 0; j < 16; j++){
+          Serial.println(writeData[j]);
+      }*/
       convertArrayAndDraw(writeData);
     }
   }
-  timeElapsed = 0;
+  timeElapsedScreen = 0;
 }
 
 /**
@@ -103,12 +106,12 @@ void Screen::drawPoint(int x, int y) {
   int writeData[] = {/*columns*/0,0,0,0,0,0,0,0,/*rows*/0,0,0,0,0,0,0,0};
   // intersection of on off column and on row will switch the light on
     for (int i = 0; i < 8; i++){
-      if (x == i) {
+      if (y == i) {
         writeData[i] = 0;
       } else {
         writeData[i] = 1;
       }
-      if (y == i) {
+      if (x == i) {
         writeData[i+8] = 1;
       } else {
         writeData[i+8] = 0;

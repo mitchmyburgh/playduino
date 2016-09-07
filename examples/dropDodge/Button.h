@@ -12,8 +12,9 @@ class Button
       int buttonPin;
       bool pressedOnce;
       bool pressed;
+      bool buttonPressed = false;
    public:
-      Button(int buttonPin_);
+      Button(int buttonPin_ = 0);
       void loop();
       bool isPressed();
       bool isPressedOnce();

@@ -63,17 +63,17 @@ int Entity::getY() {
 }
 
 /**
- * getWidth - returns the width value of the entity
- * return int width
+ * setX - set the x position of the Entity
+ * int x_ - the x position
  */
-int Entity::getWidth() {
-  return width;
+void Entity::setX(int x_) {
+  x = x_;
 }
 
 /**
- * getHeight - returns the height value of the entity
- * return int height
+ * setY - set the y position of the Entity
+ * int y_ - the y position
  */
-int Entity::getHeight() {
-  return height;
+void Entity::setY(int y_) {
+  y = y_;
 }

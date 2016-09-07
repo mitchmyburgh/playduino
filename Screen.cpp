@@ -108,6 +108,7 @@ void Screen::playAnimation() {
  */
 void Screen::loop() {
   if (animOn){
+    drawMatrix(smileMatrix, 10000);
     drawMatrix(blankMatrix, 400);
     drawMatrix(anim1Matrix, 400);
     drawMatrix(anim2Matrix, 400);

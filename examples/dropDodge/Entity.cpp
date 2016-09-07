@@ -47,7 +47,7 @@ void Entity::loop() {
  * int checkY - the y vlaue of point to checkY
  * return bool - does the point collide with entity
  */
-bool checkCollision(int checkX, int checkY) {
+bool Entity::checkCollision(int checkX, int checkY) {
   return (checkX == x && checkY == y);
 }
 
@@ -65,4 +65,20 @@ int Entity::getX() {
  */
 int Entity::getY() {
   return y;
+}
+
+/**
+ * setX - set the x position of the Entity
+ * int x_ - the x position
+ */
+void Entity::setX(int x_) {
+  x = x_;
+}
+
+/**
+ * setY - set the y position of the Entity
+ * int y_ - the y position
+ */
+void Entity::setY(int y_) {
+  y = y_;
 }

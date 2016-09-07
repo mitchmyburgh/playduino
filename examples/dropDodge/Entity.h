@@ -8,7 +8,7 @@
 
 class Entity
 {
-   private:
+   protected:
       int x;
       int y;
       int screenWidth;
@@ -22,5 +22,7 @@ class Entity
       int getY();
       int getWidth();
       int getHeight();
+      void setX(int x_);
+      void setY(int y_);
 };
 #endif
