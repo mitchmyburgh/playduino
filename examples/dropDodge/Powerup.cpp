@@ -14,7 +14,7 @@
  * int screenWidth_ - the number of pixels in the screen's width
  * int screenHeight_ - the number of pixels in the screen's height
  */
-Powerup::Powerup(int x_ = 0, int y_ = 0, int screenWidth_ = 8, int screenHeight_ = 8) {
+Powerup::Powerup(int x_, int y_, int screenWidth_, int screenHeight_) {
   x = x_;
   y = y_;
   screenWidth = screenWidth_;

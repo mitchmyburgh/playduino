@@ -43,7 +43,7 @@ void Screen::playAnimation() {
 }
 
 bool Screen::animationOn() {
-  return animOn;  
+  return animOn;
 }
 
 /**
@@ -160,7 +160,7 @@ void Screen::shiftOutArray(int myDataPin, int myClockPin, int* writeData) {
 
   for (i=0; i<16; i++)  {
     digitalWrite(myClockPin, 0);
-      
+
     //Sets the pin to HIGH or LOW depending on pinState
     digitalWrite(myDataPin, *(writeData+i));
     //register shifts bits on upstroke of clock pin

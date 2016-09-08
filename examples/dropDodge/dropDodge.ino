@@ -2,6 +2,7 @@
 #include "Entity.h"
 #include "Enemy.h"
 #include "Button.h"
+#include "Snake.h"
 #include "lib/elapsedMillis/elapsedMillis.h"
 
 Screen myScreen;
@@ -10,6 +11,7 @@ Button upButton;
 Button downButton;
 Button leftButton;
 Button rightButton;
+Snake* snake;
 
 Enemy enemies[8];
 
@@ -17,6 +19,7 @@ elapsedMillis timeElapsed;
 
 void setup() {
   // put your setup code here, to run once
+  Serial.begin(9600);
   myScreen = Screen();
   player = Entity(7,1);
   upButton = Button(7);
@@ -25,13 +28,20 @@ void setup() {
   rightButton = Button(4);
   randomSeed(analogRead(0));
   for (int i = 0; i < 8; i++) {
-    enemies[i] = Enemy(floor(random(8)), -1*floor(random(8)));
+    enemies[i] = Enemy((int)floor(random(8)), (int)(-1*floor(random(8))));
   }
-  Serial.begin(9600);
+
+  //snake = new Snake(4,7);
+  //snake->addNode();
+  //snake->addNode();
+
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
+  //leftButton.loop();
+  //Serial.println("Hello world");
+  //Serial.println(leftButton.isPressedOnce());
 
   myScreen.loop();
   if(!myScreen.animationOn()) {
@@ -40,23 +50,36 @@ void loop() {
     leftButton.loop();
     rightButton.loop();
     if (upButton.isPressedOnce()) {
+      //Serial.println(rightButton.isPressedOnce());
       player.move(0, -1);
     }
     if (downButton.isPressedOnce()) {
+      //Serial.println(rightButton.isPressedOnce());
       player.move(0, +1);
     }
     if (leftButton.isPressedOnce()) {
+      //Serial.println(rightButton.isPressedOnce());
       player.move(-1, 0);
     }
     if (rightButton.isPressedOnce()) {
+      //Serial.println(rightButton.isPressedOnce());
       player.move(+1, 0);
     }
+    /*Snake* currentNode = snake;
+    Serial.println((currentNode->getNode())->getX());
+    myScreen.drawPoint((currentNode->getNode())->getX(),5);
+
+    do{
+     //Serial.print("hello");
+     myScreen.drawPoint(currentNode->getNode()->getX(), currentNode->getNode()->getY());
+     currentNode = currentNode->getNext();
+    } while (currentNode->getNext() != NULL);*/
     myScreen.drawPoint(player.getX(), player.getY());
     for (int i = 0; i < 8; i++) {
       myScreen.drawPoint(enemies[i].getX(), enemies[i].getY());
       if (player.checkCollision(enemies[i].getX(), enemies[i].getY())){
         for (int i = 0; i < 8; i++) {
-          enemies[i] = Enemy(floor(random(8)), -1*floor(random(8)));
+          enemies[i] = Enemy((int)floor(random(8)), (int)(-1*floor(random(8))));
         }
         myScreen.playAnimation();
       }
