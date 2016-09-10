@@ -18,5 +18,6 @@ class Powerup
       bool checkCollision(int checkX, int checkY);
       int getX();
       int getY();
+      ~Powerup();
 };
 #endif

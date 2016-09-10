@@ -44,3 +44,7 @@ int Powerup::getX() {
 int Powerup::getY() {
   return y;
 }
+
+Powerup::~Powerup() {
+
+}

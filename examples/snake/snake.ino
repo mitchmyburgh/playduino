@@ -60,12 +60,16 @@ void loop() {
       snake->move();
       timeElapsed = 0;
     }
-    if (snake->checkCollision()){
+    /*if (snake->checkCollision()){
+      //delete snake;
+      //delete powerup;
       snake = new Snake(4,7);
+      //powerup = new Powerup((int)floor(random(8)), (int)floor(random(8)));
       screen->playAnimation();
-    }
+    }*/
     if (powerup->checkCollision(snake->getNode()->getX(), snake->getNode()->getY())){
       snake->addNode();
+      delete powerup;
       powerup = new Powerup((int)floor(random(8)), (int)floor(random(8)));
     }
   }

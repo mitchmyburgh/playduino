@@ -17,6 +17,10 @@ class Snake
       bool collidable = false;
    public:
       Snake(int x_ = 0, int y_ = 0, int screenWidth_ = 8, int screenHeight_ = 8);
+
+      // destructor : destroy objects at end of runtime
+      ~Snake();
+
       void move(int moveX = 0, int moveY = 0);
       void addNode();
       Snake* getNext();

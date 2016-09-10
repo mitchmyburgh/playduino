@@ -80,3 +80,11 @@ bool Snake::getCollidable(){
 void Snake::setCollidable(bool col){
   collidable = col;
 }
+
+Snake::~Snake(){
+  delete node;
+  delete next; // delete single object pointer
+
+  // delete[] for arrays of objects
+
+}
