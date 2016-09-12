@@ -6,18 +6,7 @@
  #include "Arduino.h"
  #include "lib/elapsedMillis/elapsedMillis.h"
 
- elapsedMillis timeElapsedScreen;
-
-
-//set instance variables
-
-
-/*int screenWidth;
-int screenHeight;
-int latchPin;
-int clockPin;
-int dataPin;
-bool animOn;*/
+ elapsedMillis timeElapsedScreen; // timer
 
 /**
  * Constructor
@@ -26,9 +15,7 @@ bool animOn;*/
  * int screenWidth_ - the number of pixels in the screen's width
  * int screenHeight_ - the number of pixels in the screen's height
  */
-Screen::Screen(int screenWidth_, int screenHeight_, int latchPin_, int clockPin_, int dataPin_) {
-  screenWidth = screenWidth_;
-  screenHeight = screenHeight_;
+Screen::Screen(int latchPin_, int clockPin_, int dataPin_) {
   latchPin = latchPin_;
   clockPin = clockPin_;
   dataPin = dataPin_;
