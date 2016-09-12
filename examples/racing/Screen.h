@@ -99,7 +99,7 @@ class Screen
     Screen(int latchPin_ = 8, int clockPin_ = 12, int dataPin = 11);
     void playAnimation();
     void loop();
-    void drawMatrix(int matrix[8][8], int displayTime);
+    void drawMatrix(int matrix[8][8], int displayTime = 1);
     void drawPoint(int x, int y);
     bool animationOn();
 };
