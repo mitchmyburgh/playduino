@@ -9,12 +9,13 @@
 class Powerup
 {
   private:
-      int x;
-      int y;
-      int screenWidth;
-      int screenHeight;
+      int x; // the x position of the powerup
+      int y; // the y position of the powerup
    public:
-      Powerup(int x_ = 0, int y_ = 0, int screenWidth_ = 8, int screenHeight_ = 8);
+      Powerup(int x_ = 0, int y_ = 0);
       bool checkCollision(int checkX, int checkY);
+      int getX();
+      int getY();
+      ~Powerup();
 };
 #endif

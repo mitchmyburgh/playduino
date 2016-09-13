@@ -5,20 +5,14 @@
  #include "Powerup.h"
  #include "Arduino.h"
 
-
-
 /**
  * Constructor
  * int x_ - the x position of the entity
  * int y_ - the y position of the entity
- * int screenWidth_ - the number of pixels in the screen's width
- * int screenHeight_ - the number of pixels in the screen's height
  */
-Powerup::Powerup(int x_, int y_, int screenWidth_, int screenHeight_) {
+Powerup::Powerup(int x_, int y_) {
   x = x_;
   y = y_;
-  screenWidth = screenWidth_;
-  screenHeight = screenHeight_;
 }
 
 /**
@@ -29,4 +23,27 @@ Powerup::Powerup(int x_, int y_, int screenWidth_, int screenHeight_) {
  */
 bool Powerup::checkCollision(int checkX, int checkY) {
   return (checkX == x && checkY == y);
+}
+
+/**
+ * getX - returns the x value of the entity
+ * return int x
+ */
+int Powerup::getX() {
+  return x;
+}
+
+/**
+ * getY - returns the y value of the entity
+ * return int y
+ */
+int Powerup::getY() {
+  return y;
+}
+
+/**
+ * Destroy the powerup
+ */
+Powerup::~Powerup() {
+
 }

@@ -29,13 +29,6 @@ void Entity::move(int moveX, int moveY) {
 }
 
 /**
- * Execute loop coommands
- */
-void Entity::loop() {
-
-}
-
-/**
  * checkCollision for point with entity
  * int checkX - x value of point to checkX
  * int checkY - the y vlaue of point to checkY
