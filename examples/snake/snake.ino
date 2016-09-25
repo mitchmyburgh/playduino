@@ -68,7 +68,7 @@ void loop() {
     }
     if (powerup->checkCollision(snake->getNode()->getX(), snake->getNode()->getY())){
       snake->addNode();
-      delete powerup;
+      //delete powerup;
       powerup = new Powerup((int)floor(random(8)), (int)floor(random(8)));
     }
   }

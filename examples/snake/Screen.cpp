@@ -38,7 +38,6 @@ bool Screen::animationOn() {
  */
 void Screen::loop() {
   if (animOn){
-    //drawMatrix(smileMatrix, 400);
     drawMatrix(blankMatrix, 400);
     drawMatrix(anim1Matrix, 400);
     drawMatrix(anim2Matrix, 400);
@@ -49,7 +48,6 @@ void Screen::loop() {
     drawMatrix(anim1Matrix, 400);
     drawMatrix(blankMatrix, 400);
     animOn = false;
-    //gameOn = true;
   }
 }
 
@@ -74,9 +72,6 @@ void Screen::drawMatrix(int matrix[8][8], int displayTime) {
           writeData[j] = 1;
         }
       }
-      /*for (int j = 0; j < 16; j++){
-          Serial.println(writeData[j]);
-      }*/
       convertArrayAndDraw(writeData);
     }
   }

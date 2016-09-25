@@ -9,7 +9,7 @@
 class Button
 {
    private:
-     int buttonPin // the pin the button is connected to
+     int buttonPin; // the pin the button is connected to
      bool pressedOnce; // is true when only immediately after the button has been pressed down after relese
      bool pressed; // is the button currently down
      bool buttonPressed = false; //internal variable for dealing with pressedOnce
