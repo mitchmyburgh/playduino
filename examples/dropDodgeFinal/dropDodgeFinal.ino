@@ -3,7 +3,6 @@
 #include "Entity.h"
 #include "Enemy.h"
 #include "Button.h"
-#include "Snake.h"
 #include "lib/elapsedMillis/elapsedMillis.h"
 
 // variables
@@ -11,11 +10,12 @@ Screen* screen;
 Entity* player;
 Button* leftButton;
 Button* rightButton;
-Snake* snake;
 
 Enemy *enemies[8];
 
 elapsedMillis timeElapsed;
+
+int score = 0;
 
 // setup function
 void setup() {
@@ -32,7 +32,7 @@ void setup() {
   }
 
   //? create the player
-  player = new Entity(4, 7);
+  player = new Entity(4,7);
 }
 
 // loop function - called continously
@@ -57,19 +57,24 @@ void loop() {
         for (int i = 0; i < 8; i++) {
           enemies[i] = new Enemy((int)floor(random(8)), (int)(-1*floor(random(8))));
         }
+        Serial.println("Well done! You scored:");
+        Serial.println(score);
+        score = 0;
         //? reset the player's position
         player->setX(4);
         player->setY(7);
         screen->playAnimation();
+        break;
       }
     }
     // fires every second
     if (timeElapsed > 1000){
+      score++;
       //? move the enemies
-      for (int i = 0; i < 8; i++){
-        enemies[i]->move(0, 1);  
-      }
+      for (int i = 0; i < 8; i++) {
+          enemies[i]->move(0, 1);
+        }
       timeElapsed = 0;
     }
-  }
+  } 
 }
