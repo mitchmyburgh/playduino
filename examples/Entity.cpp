@@ -4,7 +4,6 @@
  */
  #include "Entity.h"
  #include "Arduino.h"
-
 /**
  * Constructor
  * int x_ - the x position of the entity
@@ -12,7 +11,7 @@
  * int screenWidth_ - the number of pixels in the screen's width
  * int screenHeight_ - the number of pixels in the screen's height
  */
-Entity::Entity(int x_ = 0, int y_ = 0, int screenWidth_ = 8, int screenHeight_ = 8) {
+Entity::Entity(int x_, int y_, int screenWidth_, int screenHeight_) {
   x = x_;
   y = y_;
   screenWidth = screenWidth_;
@@ -24,16 +23,9 @@ Entity::Entity(int x_ = 0, int y_ = 0, int screenWidth_ = 8, int screenHeight_ =
  * int moveX - the number of pixels to move in the X direction
  * int moveY - the number of pixels to move in the Y direction
  */
-void Entity::move(int moveX = 0, int moveY = 0) {
+void Entity::move(int moveX, int moveY) {
   x = abs(screenWidth+(x+moveX))%screenWidth;
   y = abs(screenHeight+(y+moveY))%screenHeight;
-}
-
-/**
- * Execute loop coommands
- */
-void Entity::loop() {
-
 }
 
 /**
@@ -42,7 +34,7 @@ void Entity::loop() {
  * int checkY - the y vlaue of point to checkY
  * return bool - does the point collide with entity
  */
-bool checkCollision(int checkX, int checkY) {
+bool Entity::checkCollision(int checkX, int checkY) {
   return (checkX == x && checkY == y);
 }
 

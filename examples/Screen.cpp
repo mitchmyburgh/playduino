@@ -6,79 +6,7 @@
  #include "Arduino.h"
  #include "lib/elapsedMillis/elapsedMillis.h"
 
- elapsedMillis timeElapsed;
-
-
-//set instance variables
-int mapping[] = {/*columns*/15,14,10,2,9,4,5,12,/*rows*/8,13,0,11,7,1,6,3};
-
-int smileMatrix[8][8] = {
-  {0,0,0,0,0,0,0,0},
-  {0,0,1,0,0,1,0,0},
-  {0,0,1,0,0,1,0,0},
-  {0,0,1,0,0,1,0,0},
-  {1,0,0,0,0,0,0,1},
-  {0,1,0,0,0,0,1,0},
-  {0,0,1,1,1,1,0,0},
-  {0,0,0,0,0,0,0,0}
-};
-
-
-int blankMatrix[8][8] = {
-  {0,0,0,0,0,0,0,0},
-  {0,0,0,0,0,0,0,0},
-  {0,0,0,0,0,0,0,0},
-  {0,0,0,0,0,0,0,0},
-  {0,0,0,0,0,0,0,0},
-  {0,0,0,0,0,0,0,0},
-  {0,0,0,0,0,0,0,0},
-  {0,0,0,0,0,0,0,0}
-};
-
-int anim1Matrix[8][8] = {
-  {0,0,0,0,0,0,0,0},
-  {0,0,0,0,0,0,0,0},
-  {0,0,0,0,0,0,0,0},
-  {0,0,0,1,1,0,0,0},
-  {0,0,0,1,1,0,0,0},
-  {0,0,0,0,0,0,0,0},
-  {0,0,0,0,0,0,0,0},
-  {0,0,0,0,0,0,0,0}
-};
-
-int anim2Matrix[8][8] = {
-  {0,0,0,0,0,0,0,0},
-  {0,0,0,0,0,0,0,0},
-  {0,0,1,1,1,1,0,0},
-  {0,0,1,0,0,1,0,0},
-  {0,0,1,0,0,1,0,0},
-  {0,0,1,1,1,1,0,0},
-  {0,0,0,0,0,0,0,0},
-  {0,0,0,0,0,0,0,0}
-};
-
-int anim3Matrix[8][8] = {
-  {0,0,0,0,0,0,0,0},
-  {0,1,1,1,1,1,1,0},
-  {0,1,0,0,0,0,1,0},
-  {0,1,0,0,0,0,1,0},
-  {0,1,0,0,0,0,1,0},
-  {0,1,0,0,0,0,1,0},
-  {0,1,1,1,1,1,1,0},
-  {0,0,0,0,0,0,0,0}
-};
-
-int anim4Matrix[8][8] = {
-  {1,1,1,1,1,1,1,1},
-  {1,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,1},
-  {1,1,1,1,1,1,1,1}
-};
-
+ elapsedMillis timeElapsedScreen; // timer
 
 /**
  * Constructor
@@ -87,9 +15,7 @@ int anim4Matrix[8][8] = {
  * int screenWidth_ - the number of pixels in the screen's width
  * int screenHeight_ - the number of pixels in the screen's height
  */
-Screen::Screen(int screenWidth_ = 8, int screenHeight_ = 8, int latchPin_ = 8, int clockPin_ = 12, int dataPin = 11) {
-  screenWidth = screenWidth_;
-  screenHeight = screenHeight_;
+Screen::Screen(int latchPin_, int clockPin_, int dataPin_) {
   latchPin = latchPin_;
   clockPin = clockPin_;
   dataPin = dataPin_;
@@ -103,12 +29,15 @@ void Screen::playAnimation() {
   animOn = true;
 }
 
+bool Screen::animationOn() {
+  return animOn;
+}
+
 /**
  * Loop for the screen - should be called from the main Arduino loop
  */
 void Screen::loop() {
   if (animOn){
-    drawMatrix(smileMatrix, 10000);
     drawMatrix(blankMatrix, 400);
     drawMatrix(anim1Matrix, 400);
     drawMatrix(anim2Matrix, 400);
@@ -119,7 +48,6 @@ void Screen::loop() {
     drawMatrix(anim1Matrix, 400);
     drawMatrix(blankMatrix, 400);
     animOn = false;
-    //gameOn = true;
   }
 }
 
@@ -129,15 +57,15 @@ void Screen::loop() {
  * int displayTime - how long to display the matrix for
  */
 void Screen::drawMatrix(int matrix[8][8], int displayTime) {
-  timeElapsed = 0;
-  while(timeElapsed < displayTime){
+  timeElapsedScreen = 0;
+  while(timeElapsedScreen < displayTime){
     int writeData[] = {/*columns*/0,0,0,0,0,0,0,0,/*rows*/0,0,0,0,0,0,0,0};
     for (int i = 0; i < 8; i++){
       for (int j = 0; j < 16; j++){
         writeData[j] = 0;
       }
       for (int j = 0; j < 8; j++){
-        if (matrix[i][j] == 1) {
+        if (matrix[j][i] == 1) {
           writeData[i+8] = 1;
           writeData[j] = 0;
         } else {
@@ -147,7 +75,7 @@ void Screen::drawMatrix(int matrix[8][8], int displayTime) {
       convertArrayAndDraw(writeData);
     }
   }
-  timeElapsed = 0;
+  timeElapsedScreen = 0;
 }
 
 /**
@@ -159,12 +87,12 @@ void Screen::drawPoint(int x, int y) {
   int writeData[] = {/*columns*/0,0,0,0,0,0,0,0,/*rows*/0,0,0,0,0,0,0,0};
   // intersection of on off column and on row will switch the light on
     for (int i = 0; i < 8; i++){
-      if (x == i) {
+      if (y == i) {
         writeData[i] = 0;
       } else {
         writeData[i] = 1;
       }
-      if (y == i) {
+      if (x == i) {
         writeData[i+8] = 1;
       } else {
         writeData[i+8] = 0;
@@ -180,7 +108,7 @@ void Screen::drawPoint(int x, int y) {
  * and data[8] to data[15] represents teh columns 0 to 7
  * int data[16] - the array of rows and columns and their off and on states
  */
-int * convertArrayAndDraw(int data[16]) {
+int * Screen::convertArrayAndDraw(int data[16]) {
   int drawData[] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
   for (int i = 0; i < 16; i++) {
       drawData[mapping[i]] = data[i];
@@ -197,7 +125,7 @@ int * convertArrayAndDraw(int data[16]) {
  * int myClockPin - the clock pin for the shift register
  * int * writeData - the converted data showing the rows and columns to write to
  */
-void shiftOutArray(int myDataPin, int myClockPin, int* writeData) {
+void Screen::shiftOutArray(int myDataPin, int myClockPin, int* writeData) {
   // This shifts 8 bits out MSB first,
   //on the rising edge of the clock,
   //clock idles low
