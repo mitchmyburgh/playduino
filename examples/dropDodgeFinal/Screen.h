@@ -102,5 +102,7 @@ class Screen
     void drawMatrix(int matrix[8][8], int displayTime);
     void drawPoint(int x, int y);
     bool animationOn();
+    // destructor : destroy objects at end of runtime
+    ~Screen();
 };
 #endif

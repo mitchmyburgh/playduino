@@ -72,6 +72,10 @@ void loop() {
     if (snake->checkCollision()){
       Serial.println("Well done! You scored:");
       Serial.println(score);
+      delete snake;
+      delete powerup;
+      snake = NULL;
+      powerup = NULL;
       snake = new Snake(4,7); //reset teh snake
       powerup = new Powerup((int)floor(random(8)), (int)floor(random(8))); //reset the powerup
       screen->playAnimation(); // play the animation

@@ -55,3 +55,10 @@ void Enemy::move(int moveX, int moveY) {
     setX((int)floor(random(8)));
   }
 }
+
+/**
+ * Destroy the enemy
+ */
+Enemy::~Enemy(void) {
+
+}

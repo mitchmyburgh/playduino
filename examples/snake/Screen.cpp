@@ -154,3 +154,10 @@ void Screen::shiftOutArray(int myDataPin, int myClockPin, int* writeData) {
   //stop shifting
   digitalWrite(myClockPin, 0);
 }
+
+/**
+ * Destroy the screen
+ */
+Screen::~Screen(void) {
+
+}

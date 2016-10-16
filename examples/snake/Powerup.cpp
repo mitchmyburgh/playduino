@@ -44,6 +44,6 @@ int Powerup::getY() {
 /**
  * Destroy the powerup
  */
-Powerup::~Powerup() {
+Powerup::~Powerup(void) {
 
 }

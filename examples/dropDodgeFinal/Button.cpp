@@ -51,3 +51,10 @@ bool Button::isPressed() {
 bool Button::isPressedOnce() {
   return pressedOnce;
 }
+
+/**
+ * Destroy the button
+ */
+Button::~Button(void) {
+
+}

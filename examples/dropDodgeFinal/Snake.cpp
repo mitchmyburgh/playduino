@@ -110,7 +110,7 @@ void Snake::setCollidable(bool col){
  /*
   * Destructor
   */
-Snake::~Snake(){
-  delete node;
-  delete next; // delete single object pointer
+Snake::~Snake(void){
+  delete this->node;
+  delete this->next; // delete single object pointer
 }

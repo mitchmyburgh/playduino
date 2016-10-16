@@ -21,5 +21,7 @@ class Entity
       int getY();
       void setX(int x_);
       void setY(int y_);
+      // destructor : destroy objects at end of runtime
+      ~Entity();
 };
 #endif

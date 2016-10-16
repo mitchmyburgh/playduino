@@ -18,5 +18,7 @@ class Button
       void loop();
       bool isPressed();
       bool isPressedOnce();
+      // destructor : destroy objects at end of runtime
+      ~Button();
 };
 #endif

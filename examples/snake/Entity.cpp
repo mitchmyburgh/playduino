@@ -69,3 +69,10 @@ void Entity::setX(int x_) {
 void Entity::setY(int y_) {
   y = y_;
 }
+
+/**
+ * Destroy the entity
+ */
+Entity::~Entity(void) {
+
+}
